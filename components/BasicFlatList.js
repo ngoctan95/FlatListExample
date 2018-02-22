@@ -3,7 +3,9 @@ import {
     AppRegistry,
     View,
     Text,
+    Platform,
     StyleSheet,
+    TouchableHighlight,
     FlatList,List,Image,Alert
 } from 'react-native';
 import flatListData from '../data/flatListData';
@@ -79,10 +81,22 @@ export default class BasicFlatList extends Component{
             };
         })
     };
+    _onPress(){
+        Alert.alert("You added new item")
+    }
     render(){
         return(
-            <View style={{marginTop:20}}>
-            
+            <View style={{marginTop: Platform.OS==='ios'?20:0}}>
+                <View style={{backgroundColor:'tomato',height:64,
+                            flexDirection:'row', justifyContent:'flex-end',
+                            alignContent:'center', alignItems:'center'}}>
+                    <TouchableHighlight
+                        style={{marginRight:10}}
+                        onPress={this._onPress}>
+                        <Image style={{width:35,height:35}} 
+                        source={require('../icons/add.png')}/>
+                    </TouchableHighlight>
+                </View>
                 <FlatList 
                
                 data ={flatListData}
