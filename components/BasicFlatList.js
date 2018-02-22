@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import flatListData from '../data/flatListData';
 import Swipeout from 'react-native-swipeout';
-
+import AddModel from './AddModel'
 class FlatListItem extends Component{
     constructor(props){
         super(props);
@@ -73,6 +73,7 @@ export default class BasicFlatList extends Component{
         this.state=({
             deletedRowKey:null,
         });
+        this._onPress=this._onPress.bind(this);
     }
     refreshFlatList=(deleteKey)=>{
         this.setState((prevState)=>{
@@ -82,7 +83,8 @@ export default class BasicFlatList extends Component{
         })
     };
     _onPress(){
-        Alert.alert("You added new item")
+        // Alert.alert("You added new item")
+        this.refs.addModel.showAddModal();
     }
     render(){
         return(
@@ -110,7 +112,9 @@ export default class BasicFlatList extends Component{
                 }}>
                 </FlatList>
             
-                <Text>hi</Text>
+                <AddModel ref={'addModel'} parentFlatList={this}>
+
+                </AddModel>
             </View>
         );
     }
